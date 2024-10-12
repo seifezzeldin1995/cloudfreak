@@ -1,4 +1,5 @@
-nt any
+pipeline {
+  agent any
     tools {
       maven 'maven3'
                  jdk 'JDK8'
@@ -22,7 +23,7 @@ nt any
            steps {
                script {         
                  def customImage = docker.build('cloudfreak/petclinic', "./docker")
-                 docker.withRegistry('https://acrcloud.azurecr.io', 'acr-cloud') {
+                 docker.withRegistry('https://cloudfreak.azurecr.io', 'acr-cloud') {
                  customImage.push("${env.BUILD_NUMBER}")
                  }                     
            }
